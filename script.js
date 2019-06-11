@@ -9,9 +9,9 @@ function randomNuDogImage(urlNum){
 }
 
 function displayResults(responseJson, urlNum){
-  let word = `Check out this ${urlNum} dog`;
+  let word = `Check out this ${urlNum} dog!`;
   if (urlNum > 1){
-    word = `Check out these ${urlNum} dogs`;
+    word = `Check out these ${urlNum} dog photos!`;
   }
   $('.results-desc').html(word);
   responseJson.message.forEach(function(dogPic) 
@@ -39,7 +39,7 @@ function randomDogImage(userSub){
 }
 
 function displayResultsBreed(responseJson, userSub){
-  let word = `Check out this ${userSub} dog`;
+  let word = 'Check out this cute dog photo!';
   $('.results-desc').html(word);
   let dogPic = responseJson.message;
   $('.results').append(`<img src='${dogPic}' class='results-img'>`);
