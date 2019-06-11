@@ -1,47 +1,53 @@
 'use strict';
 
-function randomDogImage(urlNum){
-
-  fetch(`https://dog.ceo/api/breeds/image/random/${urlNum}`)
+function randomDogImage(userSub){
+ console.log(userSub);
+  fetch(`https://dog.ceo/api/breed/${userSub}/images/random`)
     .then(response => response.json())
-    .then(responseJson => 
-      displayResults(responseJson, urlNum))
+    .then(responseJson => {
+        console.log(responseJson);
+      displayResults(responseJson, userSub)})
     .catch(error => alert('Something went wrong. Try again later.'));
 }
 
-function displayResults(responseJson, urlNum){
+function displayResults(responseJson, userSub){
     
-  let word = `Check out this ${urlNum} dog`;
-  if (urlNum > 1){
-    word = `Check out these ${urlNum} dogs`;
+  let word = `Check out this ${userSub} dog`;
+  if (userSub > 1){
+    word = `Check out these ${userSub} dogs`;
   }
 
   $('.results-desc').html(word);
 
-  responseJson.message.forEach(function(dogPic) 
-  {$('.results').append(`<img src='${dogPic}' class='results-img'>`);
+  let dogPic = responseJson.message
+
+  $('.results').append(`<img src='${dogPic}' class='results-img'>`);
     console.log(dogPic);
-  });
+ 
+
+  
+
   $('.results').removeClass('hidden');
 
 }
 
-function userSubmit(){
-  
-  $('form').submit((event=>{
-    event.preventDefault(event);
-    $('.results-img').remove();
-    const userInput = $('.js-dogNumber').val();
-    const urlNum = userInput.toString();
-    randomDogImage(urlNum);
-    
-        
-  }));
+
+function byBreed(){
+    $('form').submit((event =>{
+        event.preventDefault();
+        const userSub = $('.dog-Breed').val();
+        console.log(userSub);
+        randomDogImage(userSub);
+
+    }))
 }
 
 
 
 $(function (){
-  console.log('works');
-  userSubmit();
+  console.log('');
+//   userSubmit();
+  byBreed();
+
 });
+
