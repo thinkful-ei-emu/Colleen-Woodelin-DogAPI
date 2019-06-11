@@ -17,5 +17,6 @@ body {
 
 .results-img {
   display: block;
-  block-size: 
+  block-size: auto;
+  padding: 5px;
 }
