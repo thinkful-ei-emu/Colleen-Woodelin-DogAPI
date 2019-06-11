@@ -6,26 +6,29 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Dog API Example</title>
     <link rel="stylesheet" href="index.css">
-    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    
 </head>
 <body>
     <div class="container">
         <h1>Dog API: A Simple Example</h1>
 
-        <!-- <form>
+         <form id='js-number-form'>
+             <h3>Search for 1-50 Random Dog Photos</h3>
             <input class = "js-dogNumber" type="number" name="quantity" min="1" max="50">
-            <button type= 'submit'>Click me</button>
-        </form> -->
+            <button id='js-number' type='submit'>Click me</button>
+        </form> 
 
-        <form>
+        <form id='js-breed-form'>
+            <h3>Search for Random Dog Photo by Breed</h3>
             <input class = "dog-Breed" type="text" name="quantity">
-            <button type= 'submit'>Click me</button>
+            <button id='js-breed' type='submit'>Click me</button>
         </form>
         
     </div>
     <section class="results hidden">
         <h2 class='results-desc'></h2>
     </section>
-    <script src="index.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
 </body>
 </html>
