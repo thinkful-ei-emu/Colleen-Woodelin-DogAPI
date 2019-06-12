@@ -2,11 +2,18 @@
 
 function randomNuDogImage(urlNum){
   fetch(`https://dog.ceo/api/breeds/image/random/${urlNum}`)
-    .then(response => response.json())
-    .then(responseJson => 
-      displayResults(responseJson, urlNum))
-    .catch(error => alert('Something went wrong. Try again later.'));
-}
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      }
+      throw new Error (response.statusText);
+    })
+    .then(responseJson => displayResults(responseJson, urlNum))
+    .catch(err => {
+      $('.results-img').remove();
+      $('#js-error-message').text(`Something went wrong: ${err.message}`);
+    });
+  }
 
 function displayResults(responseJson, urlNum){
   let word = `Check out this ${urlNum} dog!`;
@@ -24,7 +31,10 @@ function userSubmit(){
   $('#js-number').parent().submit((event=>{
     event.preventDefault(event);
     $('.results-img').remove();
-    const userInput = $('.js-dogNumber').val();
+    let userInput = $('.js-dogNumber').val();
+    if (!userInput){
+      userInput = 3;
+    };
     const urlNum = userInput.toString();
     randomNuDogImage(urlNum);    
   }));
@@ -32,13 +42,20 @@ function userSubmit(){
 
 function randomDogImage(userSub){
   fetch(`https://dog.ceo/api/breed/${userSub}/images/random`)
-    .then(response => response.json())
-    .then(responseJson => {
-      displayResultsBreed(responseJson, userSub);})
-    .catch(error => alert('Something went wrong. Try again later.'));
+    .then(response => {
+      if (response.ok) {
+        return response.json()
+      }
+      throw new Error (response.statusText);
+    })
+    .then(responseJson => displayResultsBreed(responseJson))
+    .catch(err => {
+      $('.results-img').remove();
+      $('#js-error-message').text(`Something went wrong: ${err.message}`);
+    });
 }
 
-function displayResultsBreed(responseJson, userSub){
+function displayResultsBreed(responseJson){
   let word = 'Check out this cute dog photo!';
   $('.results-desc').html(word);
   let dogPic = responseJson.message;
